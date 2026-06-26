@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+
+# Environment Variables
+.env
+
+# VS Code
+.vscode/
+
+# Node
+node_modules/
+
+# React
+dist/
+
+# Uploads
+uploads/
+
+# Reports
+reports/
+
+# Vector Database
+vector_db/
+
+# OS Files
+.DS_Store
+Thumbs.db
