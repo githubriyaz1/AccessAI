@@ -9,6 +9,8 @@ import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
 import NotFound from "../pages/NotFound";
 
+import Upload from "../pages/Upload";
+
 function AppRoutes() {
   return (
     <BrowserRouter>
@@ -23,8 +25,13 @@ function AppRoutes() {
 
         {/* Dashboard Layout */}
         <Route path="/dashboard" element={<DashboardLayout />}>
-        <Route index element={<Dashboard />} />
-        </Route>
+    <Route index element={<Dashboard />} />
+
+    <Route
+        path="upload"
+        element={<Upload />}
+    />
+</Route>
 
         {/* 404 */}
         <Route path="*" element={<NotFound />} />

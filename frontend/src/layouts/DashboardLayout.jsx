@@ -1,4 +1,5 @@
 import { Outlet, NavLink } from "react-router-dom";
+import { useState } from "react";
 
 import {
   LayoutDashboard,
@@ -8,6 +9,8 @@ import {
   Bot,
   Settings,
   LogOut,
+  Menu,
+  X,
 } from "lucide-react";
 
 const menuItems = [
@@ -44,6 +47,8 @@ const menuItems = [
 ];
 
 export default function DashboardLayout() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div
       className="
@@ -56,18 +61,46 @@ export default function DashboardLayout() {
       overflow-hidden
       "
     >
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <aside
-        className="
-        hidden
-        lg:flex
-        w-72
-        bg-slate-900
-        text-white
-        flex-col
-        shadow-xl
-        "
+        className={`
+          fixed
+          top-0
+          left-0
+          h-screen
+          w-72
+          bg-slate-900
+          text-white
+          flex
+          flex-col
+          shadow-xl
+          z-50
+          transition-transform
+          duration-300
+          lg:translate-x-0
+          lg:static
+          ${
+            sidebarOpen
+              ? "translate-x-0"
+              : "-translate-x-full"
+          }
+        `}
       >
+        {/* Mobile Close Button */}
+        <div className="flex justify-end p-4 lg:hidden">
+          <button onClick={() => setSidebarOpen(false)}>
+            <X size={28} />
+          </button>
+        </div>
+
         <div className="px-8 py-7 border-b border-slate-700">
           <h1 className="text-3xl font-bold text-blue-400">
             AccessAI
@@ -77,7 +110,6 @@ export default function DashboardLayout() {
             Accessibility Engineering Platform
           </p>
 
-          {/* Online Badge */}
           <div className="flex items-center gap-2 mt-4">
             <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
 
@@ -93,6 +125,7 @@ export default function DashboardLayout() {
               key={item.name}
               to={item.path}
               end={item.path === "/dashboard"}
+              onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                   isActive
@@ -102,7 +135,6 @@ export default function DashboardLayout() {
               }
             >
               {item.icon}
-
               <span className="font-medium">
                 {item.name}
               </span>
@@ -133,6 +165,20 @@ export default function DashboardLayout() {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
+
+        {/* Mobile Header */}
+        <div className="lg:hidden flex items-center justify-between bg-white shadow-md p-4">
+          <button onClick={() => setSidebarOpen(true)}>
+            <Menu size={28} />
+          </button>
+
+          <h2 className="text-xl font-bold text-slate-800">
+            AccessAI
+          </h2>
+
+          <div className="w-7"></div>
+        </div>
+
         <main
           className="
           flex-1
