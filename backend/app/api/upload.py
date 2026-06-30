@@ -2,6 +2,9 @@ from fastapi import APIRouter, UploadFile, File
 import os
 import shutil
 
+from app.services.pdf_service import extract_pdf_data
+from app.accessibility.rules import analyze_accessibility
+
 router = APIRouter()
 
 UPLOAD_FOLDER = "uploads"
@@ -16,8 +19,12 @@ async def upload_file(file: UploadFile = File(...)):
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
+    pdf_data = extract_pdf_data(file_path)
+
+    analysis = analyze_accessibility(pdf_data)
+
     return {
-        "filename": file.filename,
-        "content_type": file.content_type,
-        "status": "uploaded"
+        "status": "uploaded",
+        "pdf": pdf_data,
+        "accessibility": analysis
     }
