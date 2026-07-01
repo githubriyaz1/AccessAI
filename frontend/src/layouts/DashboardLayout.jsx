@@ -1,6 +1,8 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { useState } from "react";
 
+import TopNavbar from "./TopNavbar";
+
 import {
   LayoutDashboard,
   Upload,
@@ -56,8 +58,8 @@ export default function DashboardLayout() {
       min-h-screen
       bg-linear-to-br
       from-slate-100
-      via-slate-50
-      to-blue-50
+      via-white
+      to-blue-100
       overflow-hidden
       "
     >
@@ -76,12 +78,12 @@ export default function DashboardLayout() {
           top-0
           left-0
           h-screen
-          w-72
+          w-80
           bg-slate-900
           text-white
           flex
           flex-col
-          shadow-xl
+          shadow-2xl
           z-50
           transition-transform
           duration-300
@@ -180,16 +182,29 @@ export default function DashboardLayout() {
         </div>
 
         <main
-          className="
-          flex-1
-          overflow-y-auto
-          p-4
-          sm:p-6
-          lg:p-8
-          "
-        >
-          <Outlet />
-        </main>
+className="
+flex-1
+overflow-y-auto
+bg-slate-50
+"
+>
+
+<TopNavbar />
+
+<div
+className="
+px-6
+md:px-8
+xl:px-10
+pb-10
+"
+>
+
+<Outlet />
+
+</div>
+
+</main>
       </div>
     </div>
   );

@@ -4,12 +4,12 @@ import MainLayout from "../layouts/MainLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
 
 import Landing from "../pages/Landing";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
-import Dashboard from "../pages/Dashboard";
-import NotFound from "../pages/NotFound";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
-import Upload from "../pages/Upload";
+import Upload from "../pages/Upload/Upload";
+import NotFound from "../pages/NotFound/NotFound";
 
 function AppRoutes() {
   return (
